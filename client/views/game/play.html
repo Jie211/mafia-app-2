@@ -1,0 +1,295 @@
+<template name="gamePlay">
+
+<!-- Page Content -->
+    <div class="container-fluid display-none animate-fade-in content-split-vertically position-relative">
+        <!-- Header -->
+        <div class="col col-8 s12 center-align vertical-align border-bottom-game">
+            <div class="clearfix vertical-align-child bg-game-header">
+                <h1 class="m0 tx-uppercase tx-lg position-relative">
+                    <a href="#" class="game-header-action-left waves-effect waves-light" id="game-shield" style="z-index: 1001;"><i class="material-icons">security</i></a>
+
+                    Mafia in {{ stringCrop game.city.name 10 }}
+
+                    {{# if game.is.finished }}
+                        <a href="{{ pathFor route='home' }}" class="game-header-action-right waves-effect waves-light"><i class="material-icons" >home</i></a>
+                    {{ else }}
+                        <a href="#game-menu" class="game-header-action-right waves-effect waves-light dropdown-button" data-activates="game-menu"><i class="material-icons" >more_vert</i></a>
+                        <ul id="game-menu" class="dropdown-content" style="min-width: 145px;">
+                            <li><a href="#" class="tx-uppercase game-paused" pause="1"><i class="material-icons left mr5">pause_circle_filled</i> Pause</a></li>
+                            <li class="display-none">
+                                <a href="#" class="tx-uppercase" id="game-sound-toggle" data="{{ currentPlayer.key }}">
+                                    {{# if currentPlayer.settings.sounds }}
+                                        <i class="material-icons left mr5">volume_up</i> Sounds On
+                                    {{ else }}
+                                        <i class="material-icons left mr5">volume_off</i> Sounds Off
+                                    {{/ if }}
+                                </a>
+                            </li>
+                            <li><a href="#modal-game-quit" class="tx-uppercase modal-trigger"><i class="material-icons left mr5">home</i> Quit Game</a></li>
+                            <li class="divider"></li>
+                            {{# if canExit }}
+                                <li><a href="#" class="tx-uppercase action-exit-app"><i class="material-icons left mr5">exit_to_app</i> Exit App</a></li>
+                            {{/ if }}
+                        </ul>
+                    {{/ if }}
+                </h1>
+            </div>
+        </div>
+
+        <!-- Current Player Info -->
+        <div class="col col-28 s12 bg-game-dark">
+            <div class="row vertical-align">
+                <div class="col s6 vertical-align-child center-align position-relative">
+                    <img src="{{ c.url currentPlayer.image width=200 height=200 crop='fill' }}" alt="{{ currentPlayer.name }}" class="responsive-img"/>
+
+                    {{# if not game.is.finished }}
+                        {{# if gameVotesAgainstPlayerShow currentPlayer.key }}
+                            <span class="player-vote-count" style="top: 15px; right: 20px;">{{ gameVotesAgainstPlayer currentPlayer.key }}</span>
+                        {{/ if }}
+                    {{/ if }}
+                </div>
+                <div class="col s6 vertical-align-child">
+                    <p class="tx-sm center-align mb5 mt5 tx-lh-25">{{ currentPlayer.name }}</p>
+                    <div class="divider divider-dark"></div>
+
+                    <p class="tx-sm tx-uppercase mb5 mt5 tx-lh-25">
+                        {{{ currentPlayerCharacterText currentPlayer.character }}}
+                    </p>
+                    <div class="divider divider-dark"></div>
+
+                    <p class="tx-sm tx-uppercase mb5 mt5 tx-lh-25">
+                        {{{ currentPlayerAliveOrDeadText currentPlayer.alive }}}
+                    </p>
+                    <div class="divider divider-dark"></div>
+
+                    {{# if currentPlayerIsDoctor currentPlayer.character }}
+                        {{# if currentPlayer.alive }}
+                            {{# if gameActionCanSave }}
+                                <p class="waves-effect waves-light game-action-save tx-sm tx-uppercase mb5 mt5 tx-lh-25" data="{{ currentPlayer.key }}">
+                                    <i class="material-icons left mr5 white-text text-darken-2">add_circle</i> Save Yourself
+                                </p>
+                                <div class="divider divider-dark"></div>
+                            {{/ if }}
+                        {{/ if }}
+                    {{/ if }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Info -->
+        <div class="col-6 vertical-align">
+            <div class="clearfix vertical-align-child">
+                <p class="tx-md tx-uppercase mt5 mb0 center-align game-info-text">
+                    {{# if game.is.finished }}
+                         Game Finished &bull; {{ gameFinishedText }}
+                    {{ else }}
+                        Round {{{ gameRoundNumber }}}
+
+                        {{# if currentPlayer.alive }}
+                            {{{ gameActionVoteText currentPlayer.key }}}
+
+                            {{# if currentPlayerIsMafia currentPlayer.character }}
+                                {{{ gameActionKillText }}}
+                            {{/ if }}
+
+                            {{# if currentPlayerIsDoctor currentPlayer.character }}
+                                {{{ gameActionSaveText }}}
+                            {{/ if }}
+
+                            {{# if currentPlayerIsDetective currentPlayer.character }}
+                                {{{ gameActionInvestigateText }}}
+                            {{/ if }}
+                        {{ else }}
+                            &bull; Spectate
+                        {{/ if }}
+                    {{/ if }}
+                </p>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="col col-8 s12 center-align vertical-align">
+            <div class="clearfix vertical-align-child">
+                <ul class="tabs bg-transparent">
+                    <li class="tab col s3"><a href="#tab-player" class="active">Players</a></li>
+                    <li class="tab col s3"><a href="#tab-activities">Activities ({{ game.activities.length }})</a></li>
+                    <li class="tab col s3"><a href="#tab-discussion">Discuss ({{ game.discussions.user.length }})</a></li>
+                    {{# if currentPlayerIsMafia currentPlayer.character }}
+                        <li class="tab col s3" style="display: none;"><a href="#tab-discussion-mafia">Mafia</a></li>
+                    {{/ if }}
+                </ul>
+            </div>
+        </div>
+
+        <div class="col col-50 s12 bg-game-dark">
+
+            <!-- Tab Players List -->
+            <div class="row mb0" id="tab-player">
+                {{# each arrayKeyValue game.players.list }}
+                    {{# if notEqualTo value.id currentUser._id }}
+                        <div class="col s4 left {{ playerAliveOrDeadBg value.alive }} border-all-game p0 transitions-all">
+                            <p class="mt10 mb0 pr10 pl10 center-align position-relative">
+                                {{# if game.is.finished }}
+                                    {{# if currentPlayerIsMafia value.character }}
+                                        <img src="/images/logo.png"  alt="mafia" class="responsive-img rounded" style="width: 100px; height: 100px;"/>
+                                    {{ else }}
+                                        <img src="{{ c.url value.image width=100 height=100 crop='fill' }}" alt="{{ value.name }}" class="responsive-img rounded"/>
+                                    {{/ if }}
+                                {{ else }}
+                                    <img src="{{ c.url value.image width=100 height=100 crop='fill' }}" alt="{{ value.name }}" class="responsive-img rounded"/>
+                                {{/ if }}
+
+                                {{# if not game.is.finished }}
+                                    {{# if gameVotesAgainstPlayerShow key }}
+                                        <span class="player-vote-count">{{ gameVotesAgainstPlayer key }}</span>
+                                    {{/ if }}
+                                {{/ if }}
+                            </p>
+                            <p class="mt5 mb0 center-align">{{ stringCrop value.name 12 }}</p>
+
+                            <div class="row mb0">
+                                {{# if currentPlayerIsCitizen currentPlayer.character }}
+                                    <div class="col s12 p0">
+                                        <button class="btn game-vote waves-effect waves-light game-action-vote" data="{{ key }}" data-current-player="{{ currentPlayer.key }}" {{ gameActionVoteDisable }} {{ gameActionVoteDoneDisable currentPlayer.key }} {{ playerAliveOrDeadBtn value.alive }} {{ playerAliveOrDeadBtn currentPlayer.alive }}><i class="material-icons small">exposure_plus_1</i></button>
+                                    </div>
+                                {{ else }}
+                                    <div class="col s6 p0">
+                                        {{# if currentPlayerIsMafia currentPlayer.character }}
+                                            <button class="btn game-kill waves-effect waves-light game-action-kill" data="{{ key }}" {{ gameActionKillDisable }} {{ playerAliveOrDeadBtn value.alive }} {{ playerAliveOrDeadBtn currentPlayer.alive }}><i class="material-icons small">cancel</i></button>
+                                        {{/ if }}
+
+                                        {{# if currentPlayerIsDoctor currentPlayer.character }}
+                                            <button class="btn game-vote waves-effect waves-light game-action-save" data="{{ key }}" {{ gameActionSaveDisable }} {{ playerAliveOrDeadBtn value.alive }} {{ playerAliveOrDeadBtn currentPlayer.alive }}><i class="material-icons small">add_circle</i></button>
+                                        {{/ if }}
+
+                                        {{# if currentPlayerIsDetective currentPlayer.character }}
+                                            <button class="btn game-vote waves-effect waves-light game-action-investigate" data="{{ key }}" {{ gameActionInvestigateDisable }} {{ playerAliveOrDeadBtn value.alive }} {{ playerAliveOrDeadBtn currentPlayer.alive }}><i class="material-icons small">search</i></button>
+                                        {{/ if }}
+                                    </div>
+                                    <div class="col s6 p0">
+                                        <button class="btn game-vote waves-effect waves-light game-action-vote" data="{{ key }}" data-current-player="{{ currentPlayer.key }}" {{ gameActionVoteDisable }} {{ gameActionVoteDoneDisable currentPlayer.key }} {{ playerAliveOrDeadBtn value.alive }} {{ playerAliveOrDeadBtn currentPlayer.alive }}><i class="material-icons small">exposure_plus_1</i></button>
+                                    </div>
+                                {{/ if }}
+                            </div>
+                        </div>
+                    {{/ if }}
+                {{/ each }}
+            </div>
+
+            <!-- Tab Activities -->
+            <div class="row mb0 display-none" id="tab-activities">
+                <ul class="collection mt0 mb0">
+                    {{# each arrayReverse game.activities }}
+                        <li class="collection-item">{{{ text }}} <span class="grey-text right tx-xs">{{ momentNice when }}</span></li>
+                    {{/ each }}
+                </ul>
+            </div>
+
+            <!-- Tab Discussion -->
+            <div class="row mb0 display-none" id="tab-discussion">
+                <ul class="collection mt0 mb0" style="margin-bottom: 55px;">
+                    {{# each arrayReverse game.discussions.user }}
+                        <li class="collection-item">{{ message }} <span class="grey-text right tx-xs">{{ name }}</span></li>
+                    {{/ each }}
+                </ul>
+
+                <div class="row m0 vertical-align" style="position: absolute; bottom: 0; width: 100%;height: 55px;background: #000;padding: 5px;">
+                    {{# if currentPlayer.alive }}
+                        <form id="form-game-discussion">
+                            <div class="col s8 pr0">
+                                <input type="text" class="m0" id="form-game-discussion-message" placeholder="Say something..." autocomplete="off"/>
+                            </div>
+
+                            <div class="col s4 pl0">
+                                <button class="btn-flat white-text waves-effect waves-light btn-block" id="form-game-discussion-submit" style="height: 43px;">
+                                    <span class="action-text">Send</span>
+                                    <span class="action-loading display-none">{{> commonLoadingAction }}</span>
+                                </button>
+                            </div>
+                        </form>
+                    {{ else }}
+                        <div class="col s12 vertical-align-child">
+                            <p class="center-align tx-md tx-light tx-uppercase m0">You are dead!</p>
+                        </div>
+                    {{/ if }}
+                </div>
+            </div>
+
+            {{# if currentPlayerIsMafia currentPlayer.character }}
+                <!-- Tab Discussion Mafia -->
+                <div class="row mb0 display-none" id="tab-discussion-mafia">
+                    <ul class="collection mt0 mb0" style="margin-bottom: 55px;">
+                        {{# each arrayReverse game.discussions.mafia }}
+                            <li class="collection-item">{{ message }} <span class="grey-text right tx-xs">{{ name }}</span></li>
+                        {{/ each }}
+                    </ul>
+
+                    <div class="row m0 vertical-align" style="position: absolute; bottom: 0; width: 100%;height: 55px;background: #000;padding: 5px;">
+                        {{# if currentPlayer.alive }}
+                            <form id="form-game-discussion-mafia">
+                                <div class="col s8 pr0">
+                                    <input type="text" class="m0" id="form-game-discussion-mafia-message" placeholder="Say something to other mafia..." autocomplete="off"/>
+                                </div>
+
+                                <div class="col s4 pl0">
+                                    <button class="btn-flat white-text waves-effect waves-light btn-block" id="form-game-discussion-mafia-submit" style="height: 43px;">
+                                        <span class="action-text">Send</span>
+                                        <span class="action-loading display-none">{{> commonLoadingAction }}</span>
+                                    </button>
+                                </div>
+                            </form>
+                        {{ else }}
+                            <div class="col s12 vertical-align-child">
+                                <p class="center-align tx-md tx-light tx-uppercase m0">You are dead!</p>
+                            </div>
+                        {{/ if }}
+                    </div>
+                </div>
+            {{/ if }}
+        </div>
+
+        <!-- Notify -->
+        <div id="notify" class="display-none">
+            <div class="notify vertical-align">
+                <div class="notify-message vertical-align-child center-align">
+                    <p class="tx-light tx-uppercase white-text">
+                        <span class="pulse display-none"></span>
+                        <span class="normal display-none tx-lg"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-shield-overlay" class="display-none"></div>
+
+        {{# if game.settings.paused }}
+            <div id="game-paused-overlay" class="vertical-align">
+                <div class="clearfix vertical-align-child center-align">
+                    <p class="tx-light tx-uppercase white-text tx-lg">Game has been paused</p>
+
+                    <button class="btn waves-effect waves-light game-paused" pause="0">
+                        Continue <i class="material-icons right">play_circle_filled</i>
+                    </button>
+                </div>
+            </div>
+        {{/ if }}
+    </div>
+
+<!-- Modals -->
+    {{#contentFor "modals"}}
+        <!-- Quit -->
+        <div id="modal-game-quit" class="modal">
+            <div class="modal-content">
+                <h4 class="tx-light tx-uppercase tx-md">Quit this game?</h4>
+
+                <p>Are you sure you want to quit this game?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ pathFor route='home' }}" class="modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+    {{/contentFor}}
+
+</template>

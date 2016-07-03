@@ -1,0 +1,518 @@
+/* materialpalette.com/brown/red */
+    .dark-primary-color    { background: #5D4037; }
+    .default-primary-color { background: #795548; }
+    .light-primary-color   { background: #D7CCC8; }
+    .text-primary-color    { color: #FFFFFF; }
+    .accent-color          { background: #FF5252; }
+    .primary-text-color    { color: #212121; }
+    .secondary-text-color  { color: #727272; }
+    .divider-color         { border-color: #B6B6B6; }
+
+/* --------------- Common --------------- */
+    html, body { background-color: #efebe9; padding: 0px; line-height: normal; }
+    .display-none { display: none; }
+    .divider-theme { background-color: #B6B6B6; }
+    .divider-dark { background-color: #333; }
+    .divider-game { background-color: rgba(0, 0, 0, 0.5); height: 5px; }
+    .cursor-pointer { cursor: pointer; }
+    .border-bottom-game { border-bottom: 5px solid rgba(0, 0, 0, 0.5); }
+    .border-all-game { border: 1px solid rgba(0, 0, 0, 0.8); }
+    .bg-game-header { background-color: rgba(38, 166, 154, 0.5); }
+    .bg-game-dark { background-color: rgba(0, 0, 0, 0.5); }
+    .bg-game-player-alive { background-color: rgba(56, 142, 60, 0.3); }
+    .bg-game-player-dead { background-color: rgba(255, 82, 82, 0.3); }
+    .bg-transparent { background: transparent !important; }
+    .position-relative { position: relative; }
+    .transitions-all { transition: all .3s linear; }
+/* --------------- / Common --------------- */
+
+/* --------------- Typography --------------- */
+    .tx-uppercase { text-transform: uppercase; }
+    .tx-underlined { text-decoration: underline; }
+    .tx-italic { font-style: italic; }
+    /* size */
+        .tx-xxs { font-size: 10px; }
+        .tx-xs { font-size: 12px; }
+        .tx-sm { font-size: 14px; }
+        .tx-md { font-size: 18px; }
+        .tx-lg { font-size: 22px; }
+        .tx-xl { font-size: 28px; }
+        .tx-xxl { font-size: 32px; }
+        .tx-xxxl { font-size: 38px; }
+    /* line heights */
+        .tx-lh-25 { line-height: 25px; }
+    /* thickness */
+        .tx-thin { font-weight: 100; }
+        .tx-light { font-weight: 200; }
+        .tx-lighter { font-weight: 300; }
+        .tx-bold { font-weight: 500; }
+        .tx-bolder { font-weight: 700; }
+        .tx-spacing { letter-spacing: 0.2em; }
+        .tx-spacing-light { letter-spacing: 0.05em; }
+        .tx-spacing-lighter { letter-spacing: 0.02em; }
+/* --------------- / Typography --------------- */
+
+/* --------------- Margins and Padding --------------- */
+    /* left */
+    .ml0 { margin-left: 0px; }
+    .ml10 { margin-left: 10px; }
+    .pl0 { padding-left: 0px !important; }
+    .pl5 { padding-left: 5px !important; }
+    .pl10 { padding-left: 10px !important; }
+    /* right */
+    .mr0 { margin-right: 0px; }
+    .mr5 { margin-right: 5px !important; }
+    .mr10 { margin-right: 10px; }
+    .pr0 { padding-right: 0px !important; }
+    .pr5 { padding-right: 5px !important; }
+    .pr10 { padding-right: 10px !important; }
+    /* top */
+    .mt0 { margin-top: 0px; }
+    .mt5 { margin-top: 5px; }
+    .mt10 { margin-top: 10px; }
+    .mt20 { margin-top: 20px; }
+    .mt30 { margin-top: 30px; }
+    .mt15p { margin-top: 15%; }
+    .pt5 { padding-top: 5px !important; }
+    /* bottom */
+    .mb0 { margin-bottom: 0px; }
+    .mb5 { margin-bottom: 5px; }
+    .mb10 { margin-bottom: 10px; }
+    /* all */
+    .m0 { margin: 0px !important; }
+    .p0 { padding: 0px !important; }
+    .p10 { padding: 10px; }
+/* --------------- / Margins and Padding --------------- */
+
+/* --------------- Content --------------- */
+    /* content split vertically */
+        .content-split-vertically {
+            margin: 0px;
+        }
+        .content-split-vertically .col-92 {
+            padding: 0px;
+            height: 92%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content-split-vertically .col-54 {
+            padding: 0px;
+            height: 54%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content-split-vertically .col-50 {
+            padding: 0px;
+            height: 50%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content-split-vertically .col-40 {
+            padding: 0px;
+            height: 40%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content-split-vertically .col-34 {
+            padding: 0px;
+            height: 34%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content-split-vertically .col-30 {
+            padding: 0px;
+            height: 30%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content-split-vertically .col-28 {
+            padding: 0px;
+            height: 28%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content-split-vertically .col-24 {
+            padding: 0px;
+            height: 24%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content-split-vertically .col-20 {
+            padding: 0px;
+            height: 20%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content-split-vertically .col-10 {
+            padding: 0px;
+            height: 10%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content-split-vertically .col-8 {
+            padding: 0px;
+            height: 8%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .content-split-vertically .col-6 {
+            padding: 0px;
+            height: 6%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    /* vertical align */
+        .vertical-align {
+            display: table;
+            height: 100%;
+            width: 100%;
+            margin: 0px !important;
+        }
+        .vertical-align .vertical-align-child {
+            display: table-cell;
+            vertical-align: middle;
+            float: none;
+        }
+    /* loader */
+        .common-loading {
+            text-align: center;
+        }
+/* --------------- / Content --------------- */
+
+/* --------------- App Wrapper --------------- */
+    #app-wrapper {
+        clear: both;
+        padding: 0px;
+        margin: 0px;
+        position: relative;
+    }
+/* --------------- / App Wrapper --------------- */
+
+
+/* --------------- App Header --------------- */
+    #app-header {
+        clear: both;
+        height: 50px;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 3;
+    }
+    #app-header nav {
+
+    }
+    #app-header nav .brand-logo {
+        font-size: 18px;
+        height: 50px;
+        line-height: 52px;
+    }
+    #app-header nav, #app-header nav .button-collapse {
+        height: 50px;
+        line-height: 52px;
+    }
+    #app-header nav .button-collapse i, #app-header nav .button-actions i  {
+        font-size: 30px;
+        line-height: 52px;
+        height: 50px;
+    }
+    #app-header nav .button-actions {
+        position: relative;
+        z-index: 1;
+        float: right;
+    }
+/* --------------- / App Header --------------- */
+
+/* --------------- App Content --------------- */
+    #app-content {
+        clear: both;
+        top: 50px;
+        bottom: 70px;
+        left: 0;
+        position: fixed;
+        right: 0;
+        z-index: 1;
+        padding: 0px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    #app-content .container {
+        height: 100%;
+    }
+    /* map */
+        #app-content .map {
+            height: 100%;
+        }
+    /* fullscreen slider */
+        #app-content .slider.fullscreen {
+            text-shadow: 0px 1px 1px #666;
+        }
+        #app-content .slider.fullscreen .btn {
+            text-shadow: none;
+        }
+    /* accounts */
+        #app-content .accounts-wrapper .at-oauth {
+            margin-bottom: 10px;
+        }
+        #app-content .accounts-wrapper .row {
+            margin-bottom: 10px;
+        }
+        #app-content .accounts-wrapper .at-title .header {
+            text-align: center;
+            font-size: 28px;
+            text-transform: uppercase;
+        }
+        #app-content .accounts-wrapper .at-error {
+            background-color: transparent !important;
+            border-radius: 2px;
+            box-shadow: none;
+            margin: 0px;
+            padding: 0px;
+            text-align: center;
+            transition: box-shadow 0.25s ease 0s;
+        }
+/* --------------- / App Content --------------- */
+
+/* --------------- App Footer --------------- */
+    #app-footer {
+        clear: both;
+        height: 70px;
+        left: 0;
+        position: fixed;
+        right: 0;
+        bottom: 0 !important;
+        z-index: 2;
+        overflow: hidden;
+        box-shadow: 0 1px 8px 4px rgba(0, 0, 0, 0.12)
+    }
+    /* footer icons */
+        #app-footer .footer-icons {
+            border-top: 2px solid #5D4037;
+            background-color: #fff;
+            margin: 0px;
+        }
+        #app-footer .footer-icons .col {
+            padding: 0px;
+        }
+        #app-footer .footer-icons .col a {
+            color: #5D4037;
+            display: block;
+            text-transform: uppercase;
+            font-size: 12px;
+            line-height: 12px;
+            padding-top: 12px;
+            height: 68px;
+        }
+        #app-footer .footer-icons .col a.active {
+            color: #FF5252;
+        }
+        #app-footer .footer-icons .col a i {
+            font-size: 30px;
+            line-height: 30px;
+        }
+        #app-footer .footer-icons a p {
+            margin: 5px 0px 0px 0px;
+            font-size: 12px;
+            line-height: 12px;
+        }
+/* --------------- / App Footer --------------- */
+
+/* --------------- App Focused --------------- */
+    .focused #app-content {
+        bottom: 0px !important;
+    }
+    .focused #app-footer {
+        display: none !important;
+    }
+/* --------------- / App Focused --------------- */
+
+
+/* --------------- App Game Content --------------- */
+    #app-full-content {
+        bottom: 0px;
+        clear: both;
+        left: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: fixed;
+        right: 0;
+        top: 0px;
+        z-index: 996;
+        background-color: #292929;
+        background-image: url('/images/background.jpg');
+        background-size: 100% 100%;
+        color: #ffffff;
+        border: 5px solid rgba(0, 0, 0, 0.5);
+        padding: 0px;
+    }
+    #app-full-content .container-fluid {
+        height: 100%;
+    }
+    #app-full-content .collection {
+        border: none;
+    }
+    #app-full-content .collection .collection-item {
+        background: transparent;
+        border-bottom: 1px solid #000000;
+        overflow: hidden;
+    }
+    #app-full-content .collection .collection-item:last-child {
+        border-bottom: none;
+    }
+    #app-full-content .collection .collection-item.avatar {
+        min-height: 65px;
+    }
+    /* Game */
+        #app-full-content .game-header-action-left {
+            position: absolute;
+            left: 10px;
+            color: #aaa;
+        }
+        #app-full-content .game-header-action-right {
+            position: absolute;
+            right: 10px;
+            color: #aaa;
+        }
+        #app-full-content .game-info-text {
+            color: #aaa;
+            text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.95);
+        }
+        #app-full-content #game-shield-overlay {
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            overflow: hidden;
+            background-color: #000;
+            z-index: 1000;
+        }
+        #app-full-content #game-paused-overlay {
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            overflow: hidden;
+            background-color: #000;
+            z-index: 1002;
+        }
+        #app-full-content .player-vote-count {
+            position: absolute;
+            top: 0px;
+            right: 10px;
+            background: #FF5252;
+            border-radius: 20px;
+            height: 30px;
+            width: 30px;
+            font-size: 20px;
+            line-height: 30px;
+            box-shadow: 0px 0px 5px #000;
+            text-align: center;
+        }
+    /* notify */
+        #app-full-content .notify {
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 999;
+        }
+        #app-full-content .notify .notify-message {
+            padding: 10px 50px;
+        }
+        #app-full-content .notify .pulse {
+            /* animation: fontbulger 5s infinite; */
+            font-size: 32px;
+        }
+        #app-full-content i.medium {
+            font-size: 2rem;
+            line-height: 3.5rem;
+        }
+        #app-full-content i.large {
+            font-size: 3rem;
+            line-height: 4rem;
+        }
+        #app-full-content .game-vote, #app-full-content .game-kill {
+            border-radius: 0px;
+            width: 100%;
+            padding: 0px;
+            height: 30px;
+            font-size: 24px;
+            line-height: 18px;
+            box-shadow: none;
+            background: transparent !important;
+        }
+/* --------------- / App Game Content --------------- */
+
+/* --------------- MaterialzeCSS Overrides --------------- */
+    .btn { border-radius: 18px; }
+    .btn-block { border-radius: 30px; display: block !important; width: 100%; }
+    .btn-large:disabled { background-color: transparent !important; }
+    form .row { margin-top: 0px; margin-bottom: 0px }
+    .slider .indicators .indicator-item.active { background-color: #FF5252; }
+    .input-field label, .input-field label.active, .select-wrapper + label { font-size: 1rem; }
+    input[type="range"], input[type="range"]:focus { border: none; outline: none; }
+    .collection .collection-item .title { font-size: 16px; }
+    button .preloader-wrapper.small { margin-top: 9px; }
+    #form-game-discussion-submit .preloader-wrapper { margin-top: 4px; }
+    .row .col.offset-s2 { margin-left: 16.6667% !important; }
+    .row .col.offset-s3 { margin-left: 25% !important; }
+    .camera-popup { overflow: hidden; }
+    .camera-popup img { width: 100% !important; }
+    .rounded {
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .toast { justify-content: unset; word-break: normal; }
+    img.responsive-img, video.responsive-video { width: 100%; }
+    .tabs .indicator { background-color: #FF5252; }
+    .tabs .tab a { color: #fff; }
+    .tabs .tab a.active { color: #FF5252; }
+    .dropdown-content li {
+        min-height: 34px;
+    }
+    .dropdown-content li > a, .dropdown-content li > span {
+        line-height: 14px;
+        padding: 15px;
+        font-size: 14px;
+    }
+    .select-dropdown { max-height: 175px; }
+    #sidenav-overlay { z-index: 2 !important; }
+/* --------------- / MaterialzeCSS Overrides --------------- */
+
+/* --------------- Animations --------------- */
+    @keyframes fontbulger {
+        0%, 100% {
+            font-size: 26px;
+        }
+        50% {
+            font-size: 32px;
+        }
+    }
+/* --------------- / Animations --------------- */
+
+/* --------------- Responsive --------------- */
+    @media(max-width: 600px) {
+        .brand-logo .material-icons {
+            padding: 14px 0px
+        }
+    }
+/* --------------- / Responsive --------------- */

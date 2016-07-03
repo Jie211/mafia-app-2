@@ -1,0 +1,41 @@
+<template name="userProfile">
+
+    <!-- Header Left -->
+    {{#contentFor "headerLeft"}}
+        {{> commonHeaderSideMenu }}
+    {{/contentFor}}
+
+    <!-- Header Center -->
+    {{#contentFor "headerCenter"}}
+        <a id="logo-container" href="{{ pathFor route='profile' }}" class="brand-logo tx-uppercase tx-lighter">
+            Profile
+        </a>
+    {{/contentFor}}
+
+    <!-- Header Right -->
+    {{#contentFor "headerRight"}}
+        <a href="{{ pathFor route='profileEdit' }}" class="button-actions waves-effect waves-light">
+            <i class="material-icons">edit</i>
+        </a>
+    {{/contentFor}}
+
+    <!-- Page Content -->
+    <div class="container display-none animate-fade-in">
+        <div class="row center vertical-align">
+            <div class="col s12 vertical-align-child align-center">
+                <img class="rounded" alt="loading..." src="{{ c.url currentUser.profile.image.id width=200 height=200 crop='fill' }}" style="width: 175px;"/>
+
+                <div class="divider divider-theme mt10 mb10"></div>
+
+                <h1 class="tx-lg m0">{{ currentUser.profile.name }}</h1>
+
+                <p class="center-align">
+                    <button type="button" id="btn-profile-edit" class="btn waves-effect waves-light">
+                        <i class="material-icons left">edit</i> Edit Profile
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</template>

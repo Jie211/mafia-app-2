@@ -1,0 +1,34 @@
+<template name="pagesAbout">
+
+<!-- Header -->
+    <!-- Left -->
+    {{#contentFor "headerLeft"}}
+        {{> commonHeaderSideMenu }}
+    {{/contentFor}}
+
+    <!-- Center -->
+    {{#contentFor "headerCenter"}}
+        <a id="logo-container" href="{{ pathFor route='about' }}" class="brand-logo tx-uppercase tx-lighter">
+            About
+        </a>
+    {{/contentFor}}
+
+    <!-- Right -->
+    {{#contentFor "headerRight"}}
+        <a href="{{ pathFor route='contact' }}" class="button-actions waves-effect waves-light">
+            <i class="material-icons">email</i>
+        </a>
+    {{/contentFor}}
+
+<!-- Page Content -->
+    <div class="container display-none animate-fade-in">
+        <div class="row center vertical-align">
+            <div class="col s12 vertical-align-child">
+                <p class="center-align"><img src="/images/game.png" style="width: 150px;"/></p>
+                
+                <h5 class="header light m0">Mafia is a party game which can be played with 4 or more players. Its fun and enjoyable.</h5>
+            </div>
+        </div>
+    </div>
+
+</template>

@@ -1,0 +1,61 @@
+<template name="pagesContact">
+
+<!-- Header -->
+    <!-- Left -->
+    {{#contentFor "headerLeft"}}
+        <a href="{{ pathFor route='about' }}" class="button-collapse waves-effect waves-light">
+            <i class="material-icons">navigate_before</i>
+        </a>
+    {{/contentFor}}
+
+    <!-- Center -->
+    {{#contentFor "headerCenter"}}
+        <a id="logo-container" href="{{ pathFor route='join' }}" class="brand-logo tx-uppercase tx-lighter">
+            Contact
+        </a>
+    {{/contentFor}}
+
+    <!-- Right -->
+    {{#contentFor "headerRight"}}
+        <a href="#" data-action-form="#form-contact" class="header-action button-actions waves-effect waves-light">
+            <i class="material-icons">check</i>
+        </a>
+        <a href="#" class="header-action-loading button-actions waves-effect waves-light display-none">
+            <i class="material-icons">hourglass_empty</i>
+        </a>
+    {{/contentFor}}
+
+<!-- Page Content -->
+    <div class="container display-none animate-fade-in">
+        <div class="row vertical-align">
+            <div class="col s12 vertical-align-child">
+                <form id="form-contact">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="contact-name" type="text" class="validate" value="{{ currentUser.profile.name }}" required="required"/>
+                            <label for="contact-name" class="active">Name</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="contact-email" type="email" class="validate" value="{{ userEmail }}" required="required"/>
+                            <label for="contact-email" class="active">Email</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea id="contact-message" class="materialize-textarea"></textarea>
+                            <label for="contact-message" class="active">Message</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button type="submit" id="form-contact-submit" class="waves-effect waves-light btn-large btn-block red accent-2">
+                                <span class="action-text"><i class="material-icons left">check</i> Send</span>
+                                <span class="action-loading display-none">{{> commonLoadingAction }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</template>

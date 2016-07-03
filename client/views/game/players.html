@@ -1,0 +1,120 @@
+<template name="gamePlayers">
+
+<!-- Page Content -->
+    <div class="container-fluid display-none animate-fade-in content-split-vertically">
+        <!-- Header -->
+        <div class="col col-8 s12 center-align vertical-align border-bottom-game">
+            <div class="clearfix vertical-align-child bg-game-header">
+                <h1 class="m0 tx-uppercase tx-lg position-relative">
+                    Mafia in {{ stringCrop game.city.name 10 }}
+
+                    <a href="#modal-game-quit" class="game-header-action-right waves-effect waves-light modal-trigger"><i class="material-icons">exit_to_app</i></a>
+                </h1>
+            </div>
+        </div>
+
+        <!-- Players Joined -->
+        <div class="col col-10 s12 center-align vertical-align">
+            <div class="clearfix vertical-align-child">
+                <p class="tx-lg center-align mt10 mb5">Players joined: {{ game.players.joined }}/{{ game.players.expected }}</p>
+            </div>
+        </div>
+
+        <!-- Players List -->
+        <div class="col col-50 s12">
+            <ul class="collection m0">
+                {{# each arrayReverse game.players.list }}
+                    <li class="collection-item avatar">
+                        <img src="{{ c.url image width=50 height=50 crop='fill' }}" alt="{{ name }}" class="circle">
+                        <span class="title">{{ name }}</span>
+
+                        {{# if equalTo id currentUser._id }}
+                            <p class="grey-text">
+                                {{# if ready }}
+                                    Ready
+                                {{ else }}
+                                    Not ready
+                                {{/ if }}
+                            </p>
+                            <div class="secondary-content">
+                                <div class="switch">
+                                    <label>
+                                        {{# if ready }}
+                                            <input type="checkbox" id="game-ready" checked="checked" />
+                                        {{ else }}
+                                            <input type="checkbox" id="game-ready"/>
+                                        {{/ if }}
+                                        <span class="lever m0"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        {{ else }}
+                            {{# if ready }}
+                                <p class="grey-text">Ready</p>
+                                <a href="#" class="secondary-content"><i class="material-icons">done</i></a>
+                            {{ else }}
+                                <p class="grey-text">Not ready</p>
+                                <a href="#" class="secondary-content"><i class="material-icons">timer</i></a>
+                            {{/ if }}
+                        {{/ if }}
+                    </li>
+                {{/ each }}
+            </ul>
+        </div>
+
+        <!-- City Code -->
+        <div class="col col-24 s12 center-align vertical-align">
+            <div class="clearfix vertical-align-child">
+                {{# if not started }}
+                    {{# if equalTo game.players.joined game.players.expected }}
+                        <div class="clearfix p10">
+                            <p class="tx-md">All players joined!</p>
+                            <p class="tx-md">Click on START to begin the game.</p>
+                        </div>
+                    {{ else }}
+                        <p class="tx-lg mt5 mb5">Code: {{ game.city.code }}</p>
+                        <p class="center-align mt5 mb5">{{> commonLoadingAction active="active" }}</p>
+                        <p class="center-align mt5 mb5">waiting for players...</p>
+                    {{/ if }}
+                {{ else }}
+                    <button class="btn waves-effect waves-light red accent-2 mr10" id="game-started">Play <i class="material-icons left">navigate_next</i></button>
+                {{/ if }}
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="col col-8 s12 center-align vertical-align">
+            <div class="clearfix vertical-align-child">
+                {{# if canInvite }}
+                    <button class="btn waves-effect waves-light red accent-2 mr10" id="game-invite">
+                        <span class="action-text"><i class="material-icons left">group_add</i> Invite</span>
+                        <span class="action-loading display-none"><i class="material-icons left">group_add</i> Invite</span>
+                    </button>
+                {{/ if }}
+
+                {{# if canStart }}
+                    <button class="btn waves-effect waves-light" id="game-start">Start <i class="material-icons right">navigate_next</i></button>
+                {{ else }}
+                    <button class="btn waves-effect waves-light" disabled="disabled">Start <i class="material-icons right">navigate_next</i></button>
+                {{/ if }}
+            </div>
+        </div>
+    </div>
+
+<!-- Modals -->
+    {{#contentFor "modals"}}
+        <!-- Quit -->
+        <div id="modal-game-quit" class="modal">
+            <div class="modal-content">
+                <h4 class="tx-light tx-uppercase tx-md">Quit this game?</h4>
+
+                <p>Are you sure you want to quit this game?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{{ pathFor route='home' }}" class="modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+                <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            </div>
+        </div>
+    {{/contentFor}}
+
+</template>

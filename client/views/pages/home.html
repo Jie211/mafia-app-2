@@ -1,0 +1,87 @@
+<template name="pagesHome">
+
+<!-- Header -->
+    <!-- Left -->
+    {{#contentFor "headerLeft"}}
+        {{> commonHeaderSideMenu }}
+    {{/contentFor}}
+
+    <!-- Center -->
+    {{#contentFor "headerCenter"}}
+        <a id="logo-container" href="{{ pathFor route='home' }}" class="brand-logo tx-uppercase tx-lighter">
+            Mafia!
+        </a>
+    {{/contentFor}}
+
+    <!-- Right -->
+    {{#contentFor "headerRight"}}
+        <a href="#" data-action-form="#form-create-game" class="header-action button-actions waves-effect waves-light">
+            <i class="material-icons">navigate_next</i>
+        </a>
+        <a href="#" class="header-action-loading button-actions waves-effect waves-light display-none">
+            <i class="material-icons">hourglass_empty</i>
+        </a>
+    {{/contentFor}}
+
+<!-- Page Content -->
+    <div class="container display-none animate-fade-in">
+        <div class="row vertical-align">
+            <div class="col s12 vertical-align-child">
+                <form id="form-create-game">
+                    <div class="row">
+                        <p class="col s12 center-align" style="font-size: 5.5rem; line-height: 5.5rem; margin: 0px 0px 20px 0px" id="game-expected-text">
+                            4
+                        </p>
+                        <div class="input-field col s12">
+                            <p class="range-field">
+                                <input type="range" id="game-expected" min="4" max="18" value="4"/>
+                            </p>
+                            <label for="range" class="active">Number of players</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12 mt10">
+                            <select id="game-city">
+                                <option value="Random" selected="selected">Random</option>
+                                {{#each cities }}
+                                    <option value="{{ this }}">{{ this }}</option>
+                                {{/each }}
+                            </select>
+                            <label>City</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button type="submit" id="form-create-game-submit" class="waves-effect waves-light btn-large btn-block red accent-2">
+                                <span class="action-text">Create <i class="material-icons right">navigate_next</i></span>
+                                <span class="action-loading display-none">{{> commonLoadingAction }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!-- Modals -->
+    {{#contentFor "modals"}}
+        <!-- City Selection -->
+        <div id="modal-game-city-selection" class="modal">
+            <div class="modal-content">
+                <h4 class="tx-light tx-uppercase tx-md">Select City</h4>
+
+                <div class="collection m0">
+                    {{#each cities }}
+                        <a href="#" onclick="$('#game-city').val('{{ this }}');$('#modal-game-city-selection').closeModal();" class="waves-effect waves-light collection-item">{{ this }}</a>
+                    {{/each }}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
+    {{/contentFor}}
+
+</template>
